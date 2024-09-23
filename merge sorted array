@@ -1,0 +1,42 @@
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+my fist tought was two nested for loop which i found that has o(n^2) complexity and is not that efficeint. afterward i came up with this idea that it is not needed to check every elements of nums1 for each element of nums2, that is becuase they are sorted already and there is no need to check previous elements in nums1 to find the spot for each element in nums2.
+
+# Approach
+<!-- Describe your approach to solving the problem.-->
+we accuire two index varibles one for reading and one for writing.
+the rule of thumb is to go forward in nums1 to find the place for current nums2 elements. if we are at the end of all initial valid elements in nums1, then we can add all of remaning nums2 elements as concatenation to the end of last valid element in nums1. 
+
+# Complexity
+- Time complexity:
+<!-- Add your time complexity here, e.g.  -->
+$$O(n)$$
+- Space complexity:
+<!-- Add your space complexity here, e.g. \-->
+$$O(n)$$
+
+# Code
+```python []
+class Solution(object):
+    def merge(self, nums1, m, nums2, n):
+        """
+        :type nums1: List[int]
+        :type m: int
+        :type nums2: List[int]
+        :type n: int
+        :rtype: None Do not return anything, modify nums1 in-place instead.
+        """
+        
+        readindex=0 #index for reading from nums2
+        writeindex=0 #index for writing in nums1
+        afternums1=m #detects if we have reached end of nums1 valid elements.
+        while(readindex<n and writeindex<m+n):
+            if((nums2[readindex]<nums1[writeindex]) or (nums1[writeindex]==0 and writeindex>=afternums1)):
+                nums1[writeindex+1:]=nums1[writeindex:-1]
+                nums1[writeindex]=nums2[readindex]
+                readindex+=1
+                if(writeindex<afternums1):#extend the lenght of nums1 which still contains initial values of nums1 by current writeindex
+                    afternums1+=1
+            writeindex+=1 
+
+```
