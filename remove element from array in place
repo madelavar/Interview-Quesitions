@@ -1,0 +1,41 @@
+# Intuition
+<!-- Describe your first thoughts on how to solve this problem. -->
+my first thought was to go through the array with one touch and each time i find an element equla to val, skip it and write the next valid element in its place.
+# Approach
+<!-- Describe your approach to solving the problem. -->
+i made two index pointer, one for reading elements and one for writing the read element in true position and skip the indeces with value equal to val
+# Complexity
+- Time complexity:
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+$$O(n)$$
+- Space complexity:
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+$$O(1)$$
+
+# Code
+```python []
+class Solution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        readIndex=0
+        writeIndex=0
+        initialLenght=len(nums)
+        k=initialLenght
+        while(readIndex<initialLenght):
+            if(nums[readIndex]==val):
+                while(readIndex<initialLenght and nums[readIndex]==val ):
+                    readIndex+=1
+                    k-=1
+            else:
+                readIndex+=1
+                writeIndex+=1
+            if (readIndex!=writeIndex and readIndex<initialLenght):
+                nums[writeIndex]=nums[readIndex]
+        return k
+            
+
+```
